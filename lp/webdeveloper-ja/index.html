@@ -1,0 +1,630 @@
+<title>高単価Web制作マスタークラス</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="コードを書かずに、50万〜300万円のプレミアムなWebサイトを作って売る方法を学ぶオンライン講座。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@500;600&family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: one framed column with hairline side rules; sections stack like a long sales letter, with two full-bleed colour bands (creator, final CTA). */
+:root {
+  --bg: #f4f6fb;          /* cool paper */
+  --surface: #ffffff;
+  --ink: #0b1a33;         /* navy ink */
+  --muted: #56627a;
+  --line: #dde3ee;
+  --accent: #c2410c;      /* burnt orange: price, arrows, emphasis */
+  --accent-ink: #ffffff;
+  --blue: #1d4fb8;        /* highlight inside quotes */
+  --hero-end: #5b7ec6;
+  --band: #0b1d3f;        /* creator band */
+  --band-ink: #eef2fa;
+  --band-muted: #a9b6d0;
+  --final-a: #0e3486;
+  --final-b: #2256c4;
+  --good: #15803d;
+  --dot: #b9c3d6;
+  --shadow: 0 1px 2px rgba(11,26,51,.06), 0 8px 24px rgba(11,26,51,.06);
+  --f-display: "Inter Tight", "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+  --f-body: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --w: 1120px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a1222; --surface: #111b2f; --ink: #e8edf7; --muted: #9aa7bf; --line: #1f2b43;
+    --accent: #ff7a3d; --accent-ink: #1a0b03; --blue: #8fb0ff; --hero-end: #17346f;
+    --band: #0d1a35; --band-ink: #eef2fa; --band-muted: #a9b6d0; --final-a: #0b2a6b; --final-b: #1b47a6;
+    --good: #4ade80; --dot: #2a3854; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0a1222; --surface: #111b2f; --ink: #e8edf7; --muted: #9aa7bf; --line: #1f2b43;
+  --accent: #ff7a3d; --accent-ink: #1a0b03; --blue: #8fb0ff; --hero-end: #17346f;
+  --band: #0d1a35; --band-ink: #eef2fa; --band-muted: #a9b6d0; --final-a: #0b2a6b; --final-b: #1b47a6;
+  --good: #4ade80; --dot: #2a3854; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 400 16px/1.8 var(--f-body);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { font-family: var(--f-display); margin: 0; text-wrap: balance; word-break: auto-phrase; letter-spacing: -0.02em; }
+p { margin: 0; }
+.nw { display: inline-block; }
+
+.wrap {
+  width: 100%; max-width: calc(var(--w) + 64px); margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 720px) { .wrap { padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); } }
+
+/* The framed column: hairlines down both sides, rules between sections */
+.frame { max-width: calc(var(--w) + 160px); margin-inline: auto; border-inline: 1px solid var(--line); }
+.sec { padding-block: clamp(64px, 9vw, 112px); border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 12px; justify-items: center; text-align: center; max-width: 760px; margin-inline: auto; }
+.eyebrow { font: 600 11px/1 var(--f-mono); letter-spacing: .22em; text-transform: uppercase; color: var(--blue); }
+.h2 { font-size: clamp(28px, 4.2vw, 44px); font-weight: 900; line-height: 1.25; }
+.lead { color: var(--muted); font-size: 16px; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 14px; text-decoration: none;
+  font: 700 15px/1 var(--f-body); letter-spacing: .02em;
+  padding: 10px 10px 10px 24px; border-radius: 12px; min-height: 52px;
+  background: var(--ink); color: var(--bg);
+  box-shadow: 0 1px 0 rgba(255,255,255,.12) inset, 0 10px 24px -8px rgba(11,26,51,.45);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn .arrow {
+  display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px;
+  background: var(--accent); color: var(--accent-ink); font-family: var(--f-display); font-size: 16px;
+  transition: transform .2s ease;
+}
+.btn:hover .arrow { transform: translateX(3px); }
+.btn.light { background: #ffffff; color: #0b1a33; box-shadow: 0 10px 30px -10px rgba(0,0,0,.5); }
+.btn.sm { min-height: 40px; font-size: 13px; padding: 6px 6px 6px 16px; border-radius: 10px; gap: 10px; }
+.btn.sm .arrow { width: 28px; height: 28px; }
+
+/* ---------- Hero ---------- */
+.hero {
+  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+  background:
+    radial-gradient(70% 60% at 50% 8%, var(--bg) 40%, transparent 75%),
+    linear-gradient(180deg, var(--bg) 20%, var(--hero-end) 100%);
+  border-bottom: 1px solid var(--line);
+}
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; }
+.brand { font: 800 15px/1 var(--f-display); letter-spacing: .02em; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+.brand-mark { width: 22px; height: 22px; border-radius: 6px; background: conic-gradient(from 210deg, var(--blue), var(--accent), var(--blue)); }
+.hero-body { display: grid; justify-items: center; text-align: center; gap: 22px; padding-block: clamp(56px, 9vw, 104px) clamp(88px, 12vw, 150px); }
+.h1 { font-size: clamp(36px, 7vw, 76px); font-weight: 900; line-height: 1.12; letter-spacing: -0.035em; }
+.h1 .price { position: relative; white-space: nowrap; font-weight: 800; }
+.h1 .price::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -0.04em; height: .07em; min-height: 3px;
+  background: var(--accent); border-radius: 2px; transform-origin: left; animation: draw .9s .3s cubic-bezier(.6,.1,.2,1) both;
+}
+.h1 .slant { display: inline-block; color: var(--accent); transform: skewX(-9deg); }
+@keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.hero-sub { max-width: 34em; color: var(--muted); font-size: clamp(15px, 1.6vw, 17px); }
+.hero-strong { font-weight: 700; font-size: 15px; }
+.scroll { display: grid; justify-items: center; gap: 12px; margin-top: 18px; text-decoration: none; }
+.scroll span { font: 600 11px/1 var(--f-mono); letter-spacing: .24em; }
+.scroll i {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--surface); box-shadow: var(--shadow); font-style: normal; font-size: 18px;
+  animation: bob 2.4s ease-in-out infinite;
+}
+@keyframes bob { 50% { transform: translateY(5px); } }
+
+/* ---------- Proof (testimonial wall) ---------- */
+.sample-note { font-size: 12px; color: var(--muted); border: 1px dashed var(--line); border-radius: 999px; padding: 6px 14px; }
+.wall {
+  margin-top: 48px; height: 620px; overflow: hidden; position: relative;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+}
+.col { min-width: 0; }
+.col-track { display: grid; gap: 20px; animation: up var(--dur, 46s) linear infinite; }
+.col:nth-child(2) .col-track { --dur: 54s; animation-direction: reverse; }
+.col:nth-child(3) .col-track { --dur: 50s; }
+.wall:hover .col-track { animation-play-state: paused; }
+@keyframes up { to { transform: translateY(calc(-50% - 10px)); } }
+.t {
+  margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  padding: 22px 22px 18px; box-shadow: var(--shadow); display: grid; gap: 18px;
+}
+.t blockquote { margin: 0; font-size: 14.5px; line-height: 1.85; }
+.t mark { background: none; color: var(--blue); font-weight: 500; }
+.t figcaption { display: flex; align-items: center; gap: 12px; }
+.av {
+  flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+  font: 700 13px/1 var(--f-display); color: #fff; background: linear-gradient(135deg, var(--hero-end), var(--blue));
+}
+.t figcaption b { display: block; font-size: 14px; line-height: 1.4; }
+.t figcaption small { display: block; font-size: 12px; color: var(--muted); line-height: 1.4; }
+.tag-sample { margin-left: auto; flex: none; font: 600 10px/1 var(--f-mono); letter-spacing: .1em; color: var(--muted); border: 1px solid var(--line); border-radius: 5px; padding: 4px 6px; }
+@media (max-width: 860px) {
+  .wall { height: auto; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; padding-bottom: 12px; -webkit-mask-image: none; mask-image: none; }
+  .col, .col-track { display: contents; }
+  .t { flex: 0 0 84%; scroll-snap-align: center; }
+  .t.clone { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .col-track { animation: none; }
+  .wall { height: auto; }
+  .t.clone { display: none; }
+}
+
+/* ---------- Results / evidence ---------- */
+.evidence { display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px; }
+.shot {
+  border: 1px dashed var(--dot); border-radius: 14px; background: var(--surface);
+  padding: 20px; display: grid; gap: 14px; align-content: start; min-height: 260px;
+}
+.shot-cap { font: 600 11px/1.5 var(--f-mono); letter-spacing: .08em; color: var(--muted); }
+.shot svg { width: 100%; height: auto; display: block; }
+.sk { height: 10px; border-radius: 4px; background: var(--line); }
+.sk-row { display: grid; grid-template-columns: 28px 1fr 64px; gap: 12px; align-items: center; padding-block: 10px; border-top: 1px solid var(--line); }
+.sk-dot { width: 20px; height: 20px; border-radius: 50%; background: var(--line); }
+.ok-pill { justify-self: end; width: 52px; height: 18px; border-radius: 999px; background: color-mix(in srgb, var(--good) 22%, transparent); }
+.trust { display: grid; justify-items: center; text-align: center; gap: 16px; max-width: 700px; margin: 56px auto 0; }
+.trust .rule { width: 36px; height: 3px; background: var(--blue); border-radius: 2px; }
+.trust p { color: var(--muted); }
+.trust strong { font-size: 15px; }
+@media (max-width: 720px) { .evidence { grid-template-columns: 1fr; } }
+
+/* ---------- What you learn ---------- */
+.learn { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 32px; margin-top: 48px; align-items: start; }
+.tabs { display: grid; gap: 4px; }
+.tab {
+  all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start;
+  padding: 16px 18px; border-radius: 12px; border: 1px solid transparent; font: 700 15px/1.55 var(--f-body);
+  color: var(--muted); transition: background .2s, color .2s, border-color .2s;
+}
+.tab svg { margin-top: 3px; }
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); background: var(--surface); border-color: var(--line); box-shadow: var(--shadow); }
+.tab:focus-visible { outline: 2px solid var(--blue); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(20px, 3vw, 32px); box-shadow: var(--shadow); display: grid; gap: 22px; min-width: 0; }
+.panel h3 { font-size: 20px; font-weight: 800; line-height: 1.45; }
+.panel p { color: var(--muted); font-size: 15px; }
+.demo { border-radius: 12px; background: var(--bg); border: 1px solid var(--line); padding: 18px; min-height: 240px; display: grid; align-content: center; overflow: hidden; }
+/* demo 1: browser */
+.browser { border-radius: 10px; background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
+.browser-bar { display: flex; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.browser-bar i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+.browser-body { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; padding: 22px; align-items: center; }
+.browser-body .lines { display: grid; gap: 9px; }
+.orb { aspect-ratio: 1; max-width: 100%; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #fff 0 6%, var(--hero-end) 30%, var(--blue) 60%, var(--band) 100%); box-shadow: 0 20px 40px -14px var(--blue); animation: spin 9s linear infinite; }
+@keyframes spin { to { filter: hue-rotate(40deg); transform: rotate(360deg); } }
+/* demo 2: steps */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; counter-reset: s; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 12px; display: grid; gap: 6px; counter-increment: s; }
+.step::before { content: "0" counter(s); font: 600 11px/1 var(--f-mono); color: var(--accent); }
+.step b { font-size: 14px; line-height: 1.4; }
+.step small { font-size: 12px; color: var(--muted); line-height: 1.6; }
+/* demo 3: prompt */
+.prompt { display: grid; gap: 12px; }
+.bubble { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 13.5px; line-height: 1.7; }
+.bubble .who { display: block; font: 600 10px/1 var(--f-mono); letter-spacing: .14em; color: var(--muted); margin-bottom: 6px; }
+.bubble.ai { border-color: color-mix(in srgb, var(--blue) 40%, var(--line)); }
+.code { font: 500 12px/1.7 var(--f-mono); color: var(--muted); white-space: pre; overflow-x: auto; }
+.code em { font-style: normal; color: var(--blue); }
+/* demo 4: ladder */
+.ladder { display: grid; gap: 10px; }
+.rung { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); }
+.rung b { font-size: 14px; }
+.rung small { display: block; font-size: 12px; color: var(--muted); }
+.rung span { font: 700 15px/1 var(--f-display); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rung.top { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent); }
+.rung.top span { color: var(--accent); }
+.ladder-note { font-size: 11px; color: var(--muted); }
+@media (max-width: 860px) {
+  .learn { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .browser-body { grid-template-columns: 1fr 96px; }
+}
+
+/* ---------- Pricing ---------- */
+.pricing { display: grid; justify-items: center; text-align: center; gap: 18px; }
+.pill { display: inline-flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 700; box-shadow: var(--shadow); }
+.pill .sep { width: 1px; height: 14px; background: var(--line); }
+.pricing .h2 { font-size: clamp(32px, 5.4vw, 60px); line-height: 1.18; letter-spacing: -0.035em; max-width: 14em; }
+.price-big { font: 800 clamp(64px, 11vw, 112px)/1 var(--f-display); color: var(--accent); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; margin-top: 18px; }
+.price-meta { display: flex; gap: 14px; align-items: baseline; justify-content: center; color: var(--muted); font-size: 15px; }
+.price-meta s { font: 700 18px/1 var(--f-display); }
+.fine { font-size: 13px; color: var(--muted); }
+.incl { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px; margin-top: 18px; padding-top: 22px; border-top: 1px solid var(--line); width: 100%; max-width: 980px; }
+.incl li { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; }
+.incl, .checks { list-style: none; padding: 0; margin: 0; }
+.chk { flex: none; color: var(--good); }
+.guarantee { display: inline-flex; align-items: center; gap: 10px; color: var(--good); font-weight: 700; font-size: 15px; margin-top: 6px; }
+
+/* ---------- Curriculum ---------- */
+.modules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 14px; background: var(--surface); overflow: hidden; margin-top: 44px; list-style: none; padding: 0; }
+.mod { display: flex; align-items: center; gap: 16px; padding: 18px 22px; border-bottom: 1px solid var(--line); min-width: 0; }
+.mod:nth-child(odd) { border-right: 1px solid var(--line); }
+.mod:nth-last-child(-n+2) { border-bottom: 0; }
+.num { flex: none; min-width: 34px; height: 34px; padding-inline: 8px; display: grid; place-items: center; border-radius: 9px; border: 1px solid var(--line); background: var(--bg); font: 600 12px/1 var(--f-mono); color: var(--blue); }
+.mod b { font-size: 15.5px; line-height: 1.5; }
+.center-cta { display: flex; justify-content: center; margin-top: 36px; }
+@media (max-width: 720px) {
+  .modules { grid-template-columns: 1fr; }
+  .mod:nth-child(odd) { border-right: 0; }
+  .mod:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+}
+
+/* ---------- Creator band ---------- */
+.band { background: radial-gradient(60% 80% at 75% 40%, color-mix(in srgb, var(--final-b) 35%, transparent), transparent 70%), var(--band); color: var(--band-ink); }
+.band-in { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: center; padding-block: clamp(64px, 9vw, 112px); }
+.portrait {
+  aspect-ratio: 4 / 5; max-width: 100%; border-radius: 18px; border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,0) 60%), repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 10px, transparent 10px 20px);
+  display: grid; place-items: center; text-align: center; color: var(--band-muted); font-size: 13px; padding: 24px;
+}
+.portrait span { display: grid; gap: 8px; justify-items: center; }
+.band .eyebrow { color: #9fb7ff; }
+.band h2 { font-size: clamp(32px, 5vw, 56px); font-weight: 900; line-height: 1.2; letter-spacing: -0.035em; margin-block: 14px 24px; }
+.band p { color: var(--band-muted); font-size: 17px; max-width: 30em; }
+.band p + p { margin-top: 14px; }
+.band .btn { margin-top: 32px; }
+@media (max-width: 760px) { .band-in { grid-template-columns: 1fr; } .portrait { max-width: 340px; } }
+
+/* ---------- FAQ ---------- */
+.faq { max-width: 720px; margin: 44px auto 0; display: grid; gap: 10px; }
+.faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 20px; font-weight: 700; font-size: 15px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: ""; flex: none; width: 8px; height: 8px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg) translateY(-3px); transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(-135deg) translateY(-2px); }
+.faq details p { padding: 0 20px 18px; color: var(--muted); font-size: 14.5px; }
+
+/* ---------- Final CTA ---------- */
+.final { background: radial-gradient(80% 120% at 50% 0%, var(--final-b), var(--final-a) 70%); color: #fff; text-align: center; }
+.final-in { display: grid; justify-items: center; gap: 22px; padding-block: clamp(64px, 9vw, 104px); }
+.final .eyebrow { color: #c9d7ff; }
+.final h2 { font-size: clamp(30px, 5.2vw, 58px); font-weight: 900; line-height: 1.22; letter-spacing: -0.035em; max-width: 16em; }
+.final .fine { color: #c9d7ff; }
+
+/* ---------- Footer ---------- */
+.foot { padding-block: 56px 40px; display: grid; gap: 36px; overflow: hidden; }
+.wordmark {
+  font: 800 clamp(34px, 8.4vw, 116px)/0.95 var(--f-display); letter-spacing: -0.03em; text-align: center; text-transform: uppercase;
+  background: radial-gradient(circle, var(--dot) 1.3px, transparent 1.7px) 0 0 / 5px 5px;
+  -webkit-background-clip: text; background-clip: text; color: transparent; user-select: none;
+}
+.foot-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; font-size: 13px; color: var(--muted); }
+.foot-links a { text-decoration: none; }
+.foot-links a:hover { color: var(--ink); text-decoration: underline; }
+.copy { text-align: center; font-size: 12px; color: var(--muted); }
+
+/* ---------- Floating CTA ---------- */
+.float {
+  position: fixed; z-index: 20;
+  right: calc(24px + env(safe-area-inset-right, 0px)); bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  transition: transform .3s ease, opacity .3s ease; transform: translateY(0); opacity: 1;
+}
+.float[data-hide="true"] { transform: translateY(24px); opacity: 0; pointer-events: none; }
+@media (max-width: 600px) {
+  .float { left: 0; right: 0; bottom: 0; padding: 12px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+  .float .btn { width: 100%; justify-content: space-between; }
+}
+</style>
+
+<div class="frame">
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="wrap">
+    <nav class="topbar" aria-label="ヘッダー">
+      <a class="brand" href="#top" id="top"><span class="brand-mark" aria-hidden="true"></span><span data-c="brand">〔ブランド名〕</span></a>
+      <a class="btn sm" data-c-href="checkout" href="#pricing">今すぐ受講する<span class="arrow" aria-hidden="true">→</span></a>
+    </nav>
+    <div class="hero-body">
+      <span class="eyebrow">Masterclass</span>
+      <h1 class="h1">
+        <span class="price">50万〜300万円</span>の<br>
+        Webサイトを、<br>
+        <span class="slant">コードなしで。</span>
+      </h1>
+      <p class="hero-sub">受賞レベルのプレミアムなWebサイトを作る<span class="nw">具体的な仕組みと、</span><span class="nw">それを高単価で売る方法まで。</span></p>
+      <p class="hero-strong">コード不要。手探り不要。初心者のための講座です。</p>
+      <a class="scroll" href="#proof"><span>SCROLL</span><i aria-hidden="true">↓</i></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ========== PROOF ========== -->
+<section class="sec" id="proof" style="border-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Proof</span>
+      <h2 class="h2">実践した人に、成果が出ています</h2>
+      <p class="lead">この仕組みを実践している人たちからの、実際のメッセージ・制作物・成果です。</p>
+      <p class="sample-note" data-c-show="sampleNote">※ 掲載中の声はレイアウト確認用のサンプル文です。公開前に実際の受講生の声へ差し替えてください。</p>
+    </div>
+
+    <div class="wall" id="wall">
+      <div class="col"><div class="col-track">
+        <figure class="t"><blockquote>「デザイン・構成・ポジショニングの分解の仕方で、全部がつながりました。<mark>今週、新規クライアントと60万円で契約しました。</mark>まだ講座の途中ですが、もう元は取れています。」</blockquote><figcaption><span class="av" aria-hidden="true">K</span><span><b>60万円の案件を受注</b><small>受講生 · 東京</small></span><span class="tag-sample">SAMPLE</span></figcaption></figure>
+        <figure class="t"><blockquote>「モジュール1と2の基本を自社のLPに取り入れただけで、<mark>CVRが27%上がり、リードの質も明らかに良くなりました。</mark>」</blockquote><figcaption><span class="av" aria-hidden="true">M</span><span><b>CVRが27%改善</b><small>受講生からのメッセージ</small></span><span class="tag-sample">SAMPLE</span></figcaption></figure>
+        <figure class="t"><blockquote>「4本見ただけで、<mark>街で見かけるサイトの階層・余白・マイクロインタラクションに目が行くようになりました。</mark>説明が驚くほどシンプルです。」</blockquote><figcaption><span class="av" aria-hidden="true">Y</span><span><b>4本目で実践に活かせた</b><small>受講生からのメッセージ</small></span><span class="tag-sample">SAMPLE</span></figcaption></figure>
+      </div></div>
+      <div class="col"><div class="col-track">
+        <figure class="t"><blockquote>「構成と見せ方を学んだ通りに実践して、<mark>初めて50万円の案件が決まりました。</mark>まだ途中なのに、制作物の見た目が明らかに高級になりました。」</blockquote><figcaption><span class="av" aria-hidden="true">S</span><span><b>初の50万円案件</b><small>受講生 · 大阪</small></span><span class="tag-sample">SAMPLE</span></figcaption></figure>
+        <figure class="t"><blockquote>「とにかく分かりやすく、構成がきれいで中身が濃い。<mark>学びながら実践して、最初のクライアントを獲得できました。</mark>払った金額以上の価値がありました。」</blockquote><figcaption><span class="av" aria-hidden="true">R</span><span><b>初クライアントを獲得</b><small>受講生からのメッセージ</small></span><span class="tag-sample">SAMPLE</span></figcaption></figure>
+        <figure class="t"><blockquote>「Webデザイナーではない、ただのマーケ担当の私でも完全に理解できました。<mark>最初の15分だけでも十分な価値がありました。</mark>」</blockquote><figcaption><span class="av" aria-hidden="true">T</span><span><b>初心者でも分かる</b><small>マーケティング担当</small></span><span class="tag-sample">SAMPLE</span></figcaption></figure>
+      </div></div>
+      <div class="col"><div class="col-track">
+        <figure class="t"><blockquote>「講座で見せてもらったのと同じ仕組みで似たサイトを作り、<mark>3日で仕上げて30万円で納品できました。</mark>」</blockquote><figcaption><span class="av" aria-hidden="true">D</span><span><b>3日で30万円のサイト</b><small>受講生 · 動画レビュー</small></span><span class="tag-sample">SAMPLE</span></figcaption></figure>
+        <figure class="t"><blockquote>「受講後、自分のサイトを丸ごと作り直しました。<mark>陰影・余白・間隔の大切さを、それまでまったく分かっていなかった。</mark>学ぶことが本当に多かったです。」</blockquote><figcaption><span class="av" aria-hidden="true">H</span><span><b>自分のサイトを全面リニューアル</b><small>受講生 · 動画レビュー</small></span><span class="tag-sample">SAMPLE</span></figcaption></figure>
+        <figure class="t"><blockquote>「最高の講座でした。デザインをする意味を見失っていたのですが、<mark>この講座のおかげで創造性が戻ってきました。</mark>」</blockquote><figcaption><span class="av" aria-hidden="true">A</span><span><b>創造性が戻った</b><small>受講生からのメッセージ</small></span><span class="tag-sample">SAMPLE</span></figcaption></figure>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== EVIDENCE ========== -->
+<section class="sec" id="results">
+  <div class="wrap">
+    <div class="evidence">
+      <div class="shot" role="img" aria-label="差し替え用の枠：売上推移のスクリーンショット">
+        <span class="shot-cap">実績画像を配置 · 決済管理画面の売上推移など</span>
+        <svg viewBox="0 0 400 150" aria-hidden="true">
+          <g stroke="var(--line)" stroke-width="1"><line x1="0" y1="30" x2="400" y2="30"/><line x1="0" y1="75" x2="400" y2="75"/><line x1="0" y1="120" x2="400" y2="120"/></g>
+          <path d="M0 128 L40 120 L80 124 L120 104 L160 108 L200 86 L240 90 L280 62 L320 66 L360 40 L400 28 L400 150 L0 150 Z" fill="var(--line)" opacity=".55"/>
+          <path d="M0 128 L40 120 L80 124 L120 104 L160 108 L200 86 L240 90 L280 62 L320 66 L360 40 L400 28" fill="none" stroke="var(--dot)" stroke-width="2.5"/>
+        </svg>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px"><div class="sk"></div><div class="sk"></div><div class="sk"></div></div>
+      </div>
+      <div class="shot" role="img" aria-label="差し替え用の枠：入金履歴のスクリーンショット">
+        <span class="shot-cap">実績画像を配置 · クライアントからの入金履歴など</span>
+        <div>
+          <div class="sk-row"><span class="sk-dot"></span><span class="sk"></span><span class="ok-pill"></span></div>
+          <div class="sk-row"><span class="sk-dot"></span><span class="sk" style="width:80%"></span><span class="ok-pill"></span></div>
+          <div class="sk-row"><span class="sk-dot"></span><span class="sk" style="width:90%"></span><span class="ok-pill"></span></div>
+          <div class="sk-row"><span class="sk-dot"></span><span class="sk" style="width:70%"></span><span class="ok-pill"></span></div>
+          <div class="sk-row"><span class="sk-dot"></span><span class="sk" style="width:85%"></span><span class="ok-pill"></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="trust">
+      <span class="rule" aria-hidden="true"></span>
+      <h2 class="h2" style="font-size:clamp(24px,3.4vw,34px)">実際の受託案件から<span class="nw">生まれた仕組みです。</span></h2>
+      <p>プレミアムなWebサイト制作のスキルを、有償のクライアントワークに変えてきたプロセスを、そのまま講座にしました。実案件をもとに組み立て、何度でも繰り返し使えるように設計しています。</p>
+      <strong>実際の売上。再現できる仕組み。スキルを収入に変える、現実的な道筋。</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHAT YOU LEARN ========== -->
+<section class="sec" id="learn">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What you learn</span>
+      <h2 class="h2">この講座で学べること</h2>
+      <p class="lead">短く、明快に、ムダなく。</p>
+    </div>
+    <div class="learn">
+      <div class="tabs" role="tablist" aria-label="講座の中身" aria-orientation="vertical">
+        <button class="tab" role="tab" id="tab-1" aria-controls="panel" aria-selected="true" data-i="0"><svg class="chk" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>コードを書かずに、プレミアムなWebサイトを作る</button>
+        <button class="tab" role="tab" id="tab-2" aria-controls="panel" aria-selected="false" tabindex="-1" data-i="1"><svg class="chk" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>寄せ集めのチュートリアルではなく、再現できる仕組みを身につける</button>
+        <button class="tab" role="tab" id="tab-3" aria-controls="panel" aria-selected="false" tabindex="-1" data-i="2"><svg class="chk" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>AIで制作スピードを上げる</button>
+        <button class="tab" role="tab" id="tab-4" aria-controls="panel" aria-selected="false" tabindex="-1" data-i="3"><svg class="chk" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>50万円以上の案件を取れる立ち位置をつくる</button>
+      </div>
+      <div class="panel" id="panel" role="tabpanel" aria-labelledby="tab-1">
+        <div data-p="0">
+          <div class="demo"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><div class="browser-body"><div class="lines"><div class="sk" style="width:40%;background:var(--accent);opacity:.7"></div><div class="sk" style="height:18px;width:95%"></div><div class="sk" style="height:18px;width:70%"></div><div class="sk" style="width:85%;margin-top:6px"></div><div class="sk" style="width:60%"></div><div class="sk" style="width:38%;height:26px;border-radius:8px;background:var(--ink);opacity:.85;margin-top:8px"></div></div><div class="orb" aria-hidden="true"></div></div></div></div>
+          <h3 style="margin-top:22px">AIへの指示だけで、レイアウト・文字組み・余白まで整ったサイトに。</h3>
+          <p style="margin-top:8px">スクロールで動く3Dのファーストビューも、WebGL・GSAP・Three.js の考え方を押さえてAIに指示するだけ。コードは書きません。</p>
+        </div>
+        <div data-p="1" hidden>
+          <div class="demo"><div class="steps"><div class="step"><b>参考を集める</b><small>受賞サイトから型を選ぶ</small></div><div class="step"><b>分解する</b><small>構成・余白・動きを読み解く</small></div><div class="step"><b>組み立てる</b><small>完成済みセクションを再利用</small></div><div class="step"><b>磨き込む</b><small>高単価に見える仕上げ</small></div></div></div>
+          <h3 style="margin-top:22px">毎回ゼロから悩まない。同じ手順で、何度でも同じ品質に。</h3>
+          <p style="margin-top:8px">参考サイトの収集と分解のメソッドを軸に、1サイト目で作った資産を2サイト目以降にそのまま使い回せる流れを作ります。</p>
+        </div>
+        <div data-p="2" hidden>
+          <div class="demo"><div class="prompt"><div class="bubble"><span class="who">YOU</span>ヒーローに、スクロールに合わせてゆっくり回転する3Dオブジェクトを置いて。余白は広めに、見出しは左寄せで。</div><div class="bubble ai"><span class="who">AI</span><div class="code">scrollTrigger: { scrub: <em>true</em> }
+rotation.y += <em>progress * Math.PI</em>
+layout: <em>"split-left"</em>, gap: <em>"clamp(32px, 6vw, 96px)"</em></div></div></div></div>
+          <h3 style="margin-top:22px">作業はAIに、判断はあなたに。</h3>
+          <p style="margin-top:8px">どこまでをAIに任せ、どこを自分で決めるか。指示の出し方と制作ワークフローを、実際の画面で順番に見せます。</p>
+        </div>
+        <div data-p="3" hidden>
+          <div class="demo"><div class="ladder"><div class="rung"><span><b>テンプレートを使った制作</b><small>価格で比べられやすい</small></span><span>〜10万円</span></div><div class="rung"><span><b>一般的なコーポレートサイト</b><small>相見積もりになりやすい</small></span><span>30万円〜</span></div><div class="rung top"><span><b>プレミアムなブランドサイト</b><small>デザインが価格の理由になる</small></span><span>50万〜300万円</span></div><span class="ladder-note">価格帯は一般的な目安です</span></div></div>
+          <h3 style="margin-top:22px">「安く作れる人」ではなく、「この人に頼みたい」と言われる側へ。</h3>
+          <p style="margin-top:8px">提案の見せ方、価格の決め方、問い合わせから受注までの流れまで。作れるだけで終わらせず、売れる状態に持っていきます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PRICING ========== -->
+<section class="sec" id="pricing">
+  <div class="wrap pricing">
+    <span class="pill"><span>コード不要</span><span class="sep" aria-hidden="true"></span><span>初心者歓迎</span><span class="sep" aria-hidden="true"></span><span>買い切り</span></span>
+    <h2 class="h2">50万〜300万円のWebサイトを、<span class="nw">コードなしで</span><span class="nw">作り始めよう。</span></h2>
+    <p class="lead">ひとつの仕組みを、ずっと使える。</p>
+    <div class="price-big" data-c="price">¥4,980</div>
+    <div class="price-meta"><s data-c="listPrice">¥74,800</s><span>買い切り（税込）</span></div>
+    <a class="btn" data-c-href="checkout" href="#pricing" style="margin-top:10px">今すぐ受講する<span class="arrow" aria-hidden="true">→</span></a>
+    <p class="fine">一括払い · 無期限で視聴可能 · 14日間返金保証</p>
+    <ul class="incl">
+      <li><svg class="chk" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>導入編＋7モジュールと実践用の教材</li>
+      <li><svg class="chk" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>プロ品質のレイアウトとビジュアルスタイル</li>
+      <li><svg class="chk" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>AIを使い、コードなしで制作</li>
+      <li><svg class="chk" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5 8.2l2 2 4-4.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>無期限アクセスと今後のアップデート</li>
+    </ul>
+    <p class="guarantee"><svg width="22" height="24" viewBox="0 0 22 24" aria-hidden="true"><path d="M11 1l9 3.5v7c0 5.6-3.8 9.8-9 11.5C5.8 21.3 2 17.1 2 11.5v-7z" fill="currentColor"/><path d="M7 12l3 3 5-6" fill="none" stroke="var(--surface)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>14日間 返金保証</p>
+  </div>
+</section>
+
+<!-- ========== CURRICULUM ========== -->
+<section class="sec" id="curriculum">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-c="courseSpec">動画31本 · 導入編＋7モジュール · 合計2時間46分</span>
+      <h2 class="h2" style="font-size:clamp(30px,5vw,56px);letter-spacing:-0.035em">AIからプレミアムなWebサイトまで、<span class="nw">一本の道筋で。</span></h2>
+      <p class="lead">デザインの基礎から始めて、AIで実践課題のスタジオサイトを制作。<br>そのあと、営業・価格設定・繰り返せる受注フローまで学びます。</p>
+    </div>
+    <ol class="modules">
+      <li class="mod"><span class="num">導入</span><b>ようこそ</b></li>
+      <li class="mod"><span class="num">1</span><b>「プレミアム」とは何か</b></li>
+      <li class="mod"><span class="num">2</span><b>受賞レベルのサイトを支える仕組み</b></li>
+      <li class="mod"><span class="num">3</span><b>参考サイトの収集と分解メソッド</b></li>
+      <li class="mod"><span class="num">4</span><b>AIを使った制作ワークフロー</b></li>
+      <li class="mod"><span class="num">5</span><b>看板作品をつくる：架空スタジオのサイト</b></li>
+      <li class="mod"><span class="num">6</span><b>クライアントを獲得する</b></li>
+      <li class="mod"><span class="num">7</span><b>1サイトから10サイトへ</b></li>
+    </ol>
+    <div class="center-cta"><a class="btn" data-c-href="checkout" href="#pricing">今すぐ受講する — <span data-c="price">¥4,980</span><span class="arrow" aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
+</main>
+</div><!-- /frame -->
+
+<!-- ========== CREATOR (full-bleed band) ========== -->
+<section class="band" id="creator">
+  <div class="wrap band-in" style="max-width:calc(var(--w) + 160px)">
+    <div class="portrait"><span><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="15" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 36c2-8 8-11 14-11s12 3 14 11" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>講師の写真を配置</span></div>
+    <div>
+      <span class="eyebrow">About the creator</span>
+      <h2>机上の理論ではなく、<span class="nw">実案件から。</span></h2>
+      <p>デザインの質がそのまま価格に反映される、高単価なWebサイトを手がけてきました。</p>
+      <p>この講座の仕組みは、その経験から生まれたものです。ネットの寄せ集めのチュートリアルではありません。</p>
+      <a class="btn light" data-c-href="checkout" href="#pricing">今すぐ受講する — <span data-c="price">¥4,980</span><span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="frame">
+<!-- ========== FAQ ========== -->
+<section class="sec" id="faq" style="border-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="h2">受講前によくある質問</h2>
+      <p class="lead">仕組み・ツール・視聴方法・お申し込みについて、はっきりお答えします。</p>
+    </div>
+    <div class="faq">
+      <details><summary>プログラミングの知識は必要ですか？</summary><p>いいえ、必要ありません。意欲のある初心者、クリエイター、制作やサービス業の方に向けて設計しています。AIを使ってコードを書かずに制作する方法と、完成したサイトを「オーダーメイドで価値がある」と感じてもらえる仕上げ方を学べます。</p></details>
+      <details><summary>3Dを使ったWebサイトも作れるようになりますか？</summary><p>はい。AIツールでレンダリング画像やWeb用の3D素材を作り、スクロールに連動する3Dのファーストビューを実践課題のサイトに組み込みます。WebGL・GSAP・Three.js の考え方をもとにAIへ指示を出す方法を学ぶので、3Dデザインの経験は不要です。</p></details>
+      <details><summary>Webデザインだけを学ぶ講座ですか？</summary><p>いいえ。AIでの制作、完成済みセクションの再利用、プロらしい見た目への仕上げ、そして価値あるサービスとして提案・販売する方法まで扱います。</p></details>
+      <details><summary>どのくらいで修了できますか？</summary><p><span data-c="courseLength">動画は全31本、合計2時間46分です。</span>導入編と7つのモジュールを自分のペースで進められます。実際に手を動かして制作・練習する時間は別に見込んでおいてください。</p></details>
+      <details><summary>購入後、すぐに何ができますか？</summary><p>決済が完了するとアカウントが作成され、受講ポータル・カリキュラム・教材・最新のアップデートにすぐアクセスできます。</p></details>
+      <details><summary>視聴期限はありますか？</summary><p>ありません。通常のお申し込みは買い切りで、無期限で視聴でき、今後のアップデートも追加料金なしで含まれます。</p></details>
+      <details><summary>返金ポリシーを教えてください。</summary><p>条件付きの14日間返金保証があります。購入から14日以内に、講座と指定の課題を修了し、メソッドを実際のWebサイトに適用したうえで、利用規約に定める証跡をご提出ください。詳しい条件は「特定商取引法に基づく表記」をご確認ください。法令上のお客様の権利には影響しません。</p></details>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ========== FINAL CTA (full-bleed band) ========== -->
+<section class="final" id="final">
+  <div class="wrap final-in">
+    <span class="eyebrow">Your path to leveling up</span>
+    <h2>今日からスキルを上げて、<span class="nw">クライアントがもっと払いたくなる</span><span class="nw">Webサイトを。</span></h2>
+    <a class="btn light" data-c-href="checkout" href="#pricing">今すぐ受講する — <span data-c="price">¥4,980</span><span class="arrow" aria-hidden="true">→</span></a>
+    <p class="fine">今日から始められる · 無期限で視聴可能 · 14日間返金保証</p>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="frame">
+  <div class="wrap foot">
+    <div class="wordmark" aria-hidden="true" data-c="wordmark">Premium Web Masterclass</div>
+    <nav class="foot-links" aria-label="フッター">
+      <a data-c-href="legal" href="#">特定商取引法に基づく表記</a>
+      <a data-c-href="terms" href="#">利用規約</a>
+      <a data-c-href="privacy" href="#">プライバシーポリシー</a>
+      <a data-c-href="contact" href="#">お問い合わせ</a>
+    </nav>
+    <p class="copy">© <span id="yr">2026</span> <span data-c="brand">〔ブランド名〕</span></p>
+  </div>
+</footer>
+
+<div class="float" id="float" data-hide="true">
+  <a class="btn" data-c-href="checkout" href="#pricing">今すぐ受講する<span class="arrow" aria-hidden="true">→</span></a>
+</div>
+
+<script>
+/* ===== 差し替えはここだけ =====
+   brand: ブランド名 / price, listPrice: 価格 / checkout: 決済ページURL
+   legal, terms, privacy, contact: フッターのリンク先
+   sampleNote: 受講生の声をサンプルのまま出すあいだは true（本物に差し替えたら false） */
+var CONFIG = {
+  brand: "〔ブランド名〕",
+  price: "¥4,980",
+  listPrice: "¥74,800",
+  courseSpec: "動画31本 · 導入編＋7モジュール · 合計2時間46分",
+  courseLength: "動画は全31本、合計2時間46分です。",
+  wordmark: "Premium Web Masterclass",
+  checkout: "#pricing",
+  legal: "#", terms: "#", privacy: "#", contact: "#",
+  sampleNote: true
+};
+
+(function () {
+  document.documentElement.lang = "ja";
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  // Apply CONFIG
+  $$("[data-c]").forEach(function (el) { var v = CONFIG[el.dataset.c]; if (typeof v === "string") el.textContent = v; });
+  $$("[data-c-href]").forEach(function (el) { var v = CONFIG[el.dataset.cHref]; if (v) el.setAttribute("href", v); });
+  $$("[data-c-show]").forEach(function (el) { el.hidden = !CONFIG[el.dataset.cShow]; });
+  var yr = document.getElementById("yr"); if (yr) yr.textContent = new Date().getFullYear();
+
+  // Testimonial wall: duplicate each column once for a seamless loop
+  $$(".col-track").forEach(function (track) {
+    $$(".t", track).forEach(function (card) {
+      var c = card.cloneNode(true); c.classList.add("clone"); c.setAttribute("aria-hidden", "true"); track.appendChild(c);
+    });
+  });
+
+  // Tabs (What you learn)
+  var tabs = $$(".tab"), panes = $$("[data-p]"), panel = document.getElementById("panel");
+  function select(i, focus) {
+    tabs.forEach(function (t, k) { var on = k === i; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1; });
+    panes.forEach(function (p, k) { p.hidden = k !== i; });
+    panel.setAttribute("aria-labelledby", tabs[i].id);
+    if (focus) tabs[i].focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { select(i); });
+    t.addEventListener("keydown", function (e) {
+      var d = (e.key === "ArrowDown" || e.key === "ArrowRight") ? 1 : (e.key === "ArrowUp" || e.key === "ArrowLeft") ? -1 : 0;
+      if (d) { e.preventDefault(); select((i + d + tabs.length) % tabs.length, true); }
+    });
+  });
+
+  // Floating CTA: show after the hero, hide while pricing or the final band is on screen
+  var fl = document.getElementById("float");
+  if ("IntersectionObserver" in window && fl) {
+    var state = { hero: true, pricing: false, final: false };
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { state[e.target.dataset.watch] = e.isIntersecting; });
+      fl.dataset.hide = (state.hero || state.pricing || state.final) ? "true" : "false";
+    }, { threshold: 0.05 });
+    [["hero", ".hero"], ["pricing", "#pricing .price-big"], ["final", "#final"]].forEach(function (p) {
+      var el = document.querySelector(p[1]); if (el) { el.dataset.watch = p[0]; io.observe(el); }
+    });
+  }
+})();
+</script>
